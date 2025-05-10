@@ -1,110 +1,75 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Menu {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+public class Menu extends JFrame {
     public Menu() {
-        Scanner input = new Scanner(System.in);
-        List<Disciplina> disciplinas = new ArrayList<>();
-        List<Estudante> estudantes = new ArrayList<>();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 400);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Sistema de Cadastro");
+        setLayout(null);
 
-        System.out.println("---------- MENU ----------\n");
-        System.out.println("1 - Cadastrar\n2 - Deletar\n3 - Editar\n4 - Listar\n5 - Sair\n");
-        System.out.print("Escolha uma opcao: ");
-        int choice = input.nextInt();
-        input.nextLine();
+        JButton buttons[] = {
+            new JButton("Cadastrar"),
+            new JButton("Excluir"),
+            new JButton("Listar"),
+            new JButton("Fechar"),
+        };
 
-        if (input.hasNextInt()) {
-            while (true) {
-                switch (choice) {
-                    case 1:
-                        System.out.println("1 - Disciplinas\n2 - Estudantes\n3 - Estudantes em uma disciplina\n");
-                        choice = input.nextInt();
-                        input.nextLine();
-                        if(input.hasNextInt()) {
-                            switch (choice) {
-                                case 1: //Cadastrar disciplina
-                                    System.out.print("Qual o nome da disciplina? ");
-                                    String nomeDisciplina = input.nextLine();
-                                    System.out.print("Qual a carga horaria da disciplina? ");
-                                    String cargaHoraria = input.nextLine();
-                                    if(!input.hasNextInt()) System.out.println("Entrada errada!");
-                                    disciplinas.add(new Disciplina(nomeDisciplina, Integer.parseInt(cargaHoraria)));
-                                    System.out.printf("Disciplina cadastrada com o nome de '%s' e uma carga horaria de %s horas!\n", nomeDisciplina, cargaHoraria);
-                                    break;
-                                case 2: //Cadastrar estudante
-                                    System.out.print("Qual o nome do estudante? ");
-                                    String nomeEstudante = input.nextLine();
-                                    System.out.print("Qual a matricula do estudante? ");
-                                    String matriculaEstudante = input.nextLine();
-                                    System.out.print("Qual o email do estudante? ");
-                                    String emailEstudante = input.nextLine();
-                                    System.out.print("Qual o endereco do estudante? ");
-                                    String enderecoEstudante = input.nextLine();
-                                    System.out.print("Qual o CPF do estudante? ");
-                                    String cpfEstudante = input.nextLine();
-                                    estudantes.add(new Estudante(matriculaEstudante, nomeEstudante, emailEstudante, enderecoEstudante, cpfEstudante));
-                                    System.out.printf("Estudante %s foi cadastrado(a)!", nomeEstudante);
-                                    break;
-                                default:
-                                    System.out.println("Opcao invalida!");
-                            }
-                        } else {
-                            System.out.println("Escolha invalida! Reinicie o programa.");
-                            input.nextLine();
-                            System.exit(0);
-                        }
-                        break;
+        JLabel text = new JLabel("Escolha uma opção");
+        text.setBounds(90, 0, 150, 100);
+        add(text);
 
-                    case 2:
-                        System.out.println("1 - Disciplinas\n2 - Estudantes\n");
-                        System.out.print("O que deseja deletar? ");
-                        choice = input.nextInt();
-                        if(input.hasNextInt()) {
-                            switch (choice) {
-                                case 1:
-                                    
-                                    break;
-                                case 2:
-    
-                                    break;
-                                default:
-                                    System.out.println("Opcao invalida!");
-                            }
-                        } else {
-                            System.out.println("Escolha invalida! Reinicie o programa.");
-                            input.nextLine();
-                            System.exit(0);
-                        }
-                        break;
-
-                    case 3:
-                        
-                        break;
-
-                    case 4:
-                        
-                        break;
-
-                    case 5: 
-                        System.out.println("Sistema encerrado!");
-                        input.close();
-                        System.exit(0);
-                        break;
-                    default:
-                        System.out.print("Escolha invalida! Tente novamente: ");
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].setBounds(94, 60 + i * 60, 100, 50);
+            add(buttons[i]);
+            JButton jButton = buttons[i];
+            jButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buttonAction(jButton);
                 }
-            }
-        } else {
-            System.out.println("Escolha invalida! Reinicie o programa.");
-            input.nextLine();
+            });
+        }
+
+        setVisible(true);
+    }
+
+    protected void buttonAction(JButton button) {
+        Object selectedValue;
+        Object options[];
+
+        if (button.getText().equals("Cadastrar")) {
+            options = new Object[]{"Disciplina", "Estudante", "Estudante em uma disciplina"};
+            selectedValue = JOptionPane.showInputDialog(null, "Escolha uma opção de cadastro", "Cadastro", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+            optionActions(selectedValue);
+        }
+
+        if (button.getText().equals("Excluir")) {
+            options = new Object[]{"Disciplina", "Estudante", "Estudante de uma disciplina"};
+            selectedValue = JOptionPane.showInputDialog(null, "Escolha uma opção para excluir", "Exclusão", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+            optionActions(selectedValue);
+        }
+
+        if (button.getText().equals("Listar")) {
+            options = new Object[]{"Disciplinas", "Estudantes"};
+            selectedValue = JOptionPane.showInputDialog(null, "Escolha uma opção para listar", "Listagem", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+            optionActions(selectedValue);
+        }
+
+        if (button.getText().equals("Fechar")) {
+            JOptionPane.showMessageDialog(null, "O Programa será encerrado!", "Aviso", JOptionPane.WARNING_MESSAGE);
             System.exit(0);
         }
     }
 
-    public static void listar(ArrayList<Object> objetos) {
-        for (Object objeto : objetos) {
-            
-        }
+    protected void optionActions(Object selectedValue) {
+        
     }
 }

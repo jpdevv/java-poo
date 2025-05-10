@@ -26,7 +26,7 @@ public class Menu extends JFrame {
         text.setBounds(90, 0, 150, 100);
         add(text);
 
-        for (int i = 0; i < buttons.length; i++) {
+        for(int i = 0; i < buttons.length; i++) {
             buttons[i].setBounds(94, 60 + i * 60, 100, 50);
             add(buttons[i]);
             JButton jButton = buttons[i];
@@ -45,31 +45,58 @@ public class Menu extends JFrame {
         Object selectedValue;
         Object options[];
 
-        if (button.getText().equals("Cadastrar")) {
+        if(button.getText().equals("Cadastrar")) {
             options = new Object[]{"Disciplina", "Estudante", "Estudante em uma disciplina"};
             selectedValue = JOptionPane.showInputDialog(null, "Escolha uma opção de cadastro", "Cadastro", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
             optionActions(selectedValue);
         }
 
-        if (button.getText().equals("Excluir")) {
+        if(button.getText().equals("Excluir")) {
             options = new Object[]{"Disciplina", "Estudante", "Estudante de uma disciplina"};
             selectedValue = JOptionPane.showInputDialog(null, "Escolha uma opção para excluir", "Exclusão", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
             optionActions(selectedValue);
         }
 
-        if (button.getText().equals("Listar")) {
+        if(button.getText().equals("Listar")) {
             options = new Object[]{"Disciplinas", "Estudantes"};
             selectedValue = JOptionPane.showInputDialog(null, "Escolha uma opção para listar", "Listagem", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
             optionActions(selectedValue);
         }
 
-        if (button.getText().equals("Fechar")) {
+        if(button.getText().equals("Fechar")) {
             JOptionPane.showMessageDialog(null, "O Programa será encerrado!", "Aviso", JOptionPane.WARNING_MESSAGE);
             System.exit(0);
         }
     }
 
     protected void optionActions(Object selectedValue) {
-        
+        if(selectedValue == null) return;
+
+        String option = selectedValue.toString();
+
+        switch (option) {
+            case "Disciplina":
+                break;
+
+            case "Estudante":
+                break;
+
+            case "Estudante em uma disciplina":
+                break;
+
+            case "Estudante de uma disciplina":
+                break;
+            
+            case "Disciplinas":
+                break;
+
+            case "Estudantes":
+                
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(null, "Opção desconhecida " + option);
+                break;
+        }
     }
 }

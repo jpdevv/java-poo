@@ -21,13 +21,22 @@ public class Disciplina {
         estudantes.remove(estudante);
     }
 
-    public void listarEstudantes() {
-        for (Estudante estudante : estudantes) {
-            estudante.info();
+    public String listarEstudantes() {
+        StringBuilder studants = new StringBuilder();
+
+        if(estudantes.isEmpty()) {
+            studants.append("Não há estudantes cadastrados nesta disciplina\n\n");
+        } else {
+            for (Estudante estudante : estudantes) {
+                studants.append(estudante.info()).append("\n\n");
+            }
         }
+        return studants.toString();
     }
 
-
+    public String info() {
+        return String.format("Código: %d\nDisciplina: %s\nCarga Horária: %d", getCod(), getNome(), getCargaHoraria());
+    }
 
     // Getters
     public String getNome(){

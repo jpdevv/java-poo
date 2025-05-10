@@ -9,6 +9,10 @@ public class Estudante {
         this.cpf = cpf;
     }
 
+    public String info(){
+        return String.format("Aluno: %s\nMatrícula: %s\nEndereço: %s\nEmail: %s\nCPF: %s\n",getNome(), getMatricula(), getEndereco(), getEmail(), getCpf());
+    }
+
     public String getNome(){
         return nome;
     }
@@ -23,9 +27,5 @@ public class Estudante {
     }
     public String getMatricula(){
         return matricula;
-    }
-
-    public void info(){
-        System.out.printf("   Aluno: %s\n       Matrícula: %s\n       Endereço: %s\n       Email: %s\n       CPF: %s\n\n",getNome(), getMatricula(), getEndereco(), getEmail(), getCpf());
     }
 }

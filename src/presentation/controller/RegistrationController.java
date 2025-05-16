@@ -1,5 +1,6 @@
 package presentation.controller;
 
+import business.services.DisciplineService;
 import business.services.PrinterService;
 import business.services.ReaderService;
 import business.services.ValidationMenuService;
@@ -8,6 +9,7 @@ public class RegistrationController {
     PrinterService printerService = new PrinterService();
     ReaderService readerService = new ReaderService();
     ValidationMenuService validationMenuService = new ValidationMenuService();
+    DisciplineService disciplineService = new DisciplineService();
     
     public void showRegistrationMenu() {
         printerService.println("---------- CADASTRO ----------");
@@ -18,7 +20,13 @@ public class RegistrationController {
         if(validationMenuService.isRegistrationOption(input)) {
             switch (input) {
                 case "1":
-                    
+                    printerService.print("Nome da disciplina: ");
+                    String discipineName = readerService.nextLine();
+                    printerService.print("Carga horária da disciplina: ");
+                    String workload = readerService.nextLine();
+                    printerService.print("Nome do professor da disciplina: ");
+                    String teacher = readerService.nextLine();
+                    disciplineService.createDiscipline(discipineName, workload, teacher);
                     break;
                 case "2":
                     

@@ -3,6 +3,7 @@ package model.entity;
 public class Discipline {
     private String name, workload, teacher;
 
+
     public Discipline(String name, String workload, String teacher) {
         super();
         this.name = name;

@@ -7,8 +7,6 @@ public class MenuController {
     ValidationMenuService validationMenuService = new ValidationMenuService();
     RegistrationController registrationController = new RegistrationController();
     PrinterService printerService = new PrinterService();
-    DeleteController deleteController = new DeleteController();
-    ListController listController = new ListController();
 
     public void showMenu(String input) {
         if(validationMenuService.isOption(input)) {
@@ -17,10 +15,10 @@ public class MenuController {
                     registrationController.showRegistrationMenu();
                     break;
                 case "2":
-                    deleteController.showDeleteMenu();
+
                     break;
                 case "3":
-                    listController.showListMenu();
+                
                     break;
                 case "4":
                     printerService.println("Fechando o sistema...");
